@@ -1,0 +1,38 @@
+﻿.diagona16px
+{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+
+.diagona10px
+{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.diagona-save
+{
+    background: url('all.png') no-repeat -251px -235px;
+}
+
+.diagona-new
+{
+    background: url('all.png') no-repeat -92px -266px;
+}
+
+.diagona-delete
+{
+    background: url('all.png') no-repeat 0 -266px;
+}
+
+.diagona-edit 
+{
+    background: url('all.png') no-repeat -368px -32px;
+}

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Distribui&ccedil;&atilde;o de Carga Hor&aacute;ria</title>
+
+    <link href="jquery/plugins/chosen/chosen.css" rel="stylesheet" type="text/css" />
+    <!--<link href="jquery/css/smoothness/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" type="text/css" />-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="img/fugue-sprite/fugue-sprite.css" rel="stylesheet" />
+    <link href="img/diagona-icons/diagona-icons.css" rel="stylesheet" />
+    <link href="jquery/plugins/jquery-simple-context-menu/jquery.contextmenu.css" rel="stylesheet" />
+    <!--Link bootstrap-->
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="css/Default.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="splash">
+        <img src="img/loading.gif" alt="Loading..." />
+    </div>
+    <div id="work" style="display: none;">
+
+
+
+
+
+        <div id="topo" class="ui-widget-header">
+            <h1></h1>
+            <div class="toolbar">
+                <span class="fugue fugue-disk" onclick="db.save();" title="Salvar"></span>
+                <span id="clipboard" class="fugue" onclick="alert('Arraste/Solte um hor&aacute;rio para guardar!');" title="Arraste/solte um hor&aacute;rio para guardar">
+                </span>
+                <span class="fugue fugue-plus" title="Mais" data-toggle="modal" data-target="#opcoesModal"></span>
+            </div>
+        </div>
+        <div id="curso">
+            <div class="filtro ui-widget ui-state-default">
+                <label for="cursoSelect">
+                    Curso:
+                </label>
+                <select id="cursoSelect" name="cursoSelect"></select>
+                <label for="nivelSelect">
+                    N&iacute;vel:
+                </label>
+                <select id="nivelSelect" name="nivelSelect">
+                    <option value="0">&nbsp;</option>
+                </select>
+                <div class="toolbar">
+                    <span class="fugue fugue-document-page-previous" onclick="skipOption('#nivelSelect', -1);" title="Anterior"></span>
+                    <span class="fugue fugue-document-page-next" onclick="skipOption('#nivelSelect');" title="Pr&ocute;ximo"></span>
+                    <span class="fugue fugue-application-sidebar-expand" onclick="toggle('#curso', '#prof', this);" title="Expandir/Contrair"></span>
+                </div>
+            </div>
+            <div class="repeater">
+                <div id="cursoTemplate">
+                    <div class="info ui-state-error ui-corner-all">
+                        <h2></h2>
+                        <h3>
+                            Campus: <span class="campusCurso"></span> N&iacute;vel: <span class="nivelCurso"></span> Turma: <span class="turmaCurso"></span> C.Custo: <span class="ccustoCurso"></span>
+                        </h3>
+                    </div>
+                    <table class="horario horariosCursoTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Hor&aacute;rio
+                                </th>
+                                <th>
+                                    Segunda
+                                </th>
+                                <th>
+                                    Ter&ccedil;a
+                                </th>
+                                <th>
+                                    Quarta
+                                </th>
+                                <th>
+                                    Quinta
+                                </th>
+                                <th>
+                                    Sexta
+                                </th>
+                                <th>
+                                    S&aacute;bado
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    08:00 - 09:40
+                                </td>
+                                <td rowspan="2" class="h" data-h="2m"></td>
+                                <td rowspan="2" class="h" data-h="3m"></td>
+                                <td rowspan="2" class="h" data-h="4m"></td>
+                                <td rowspan="2" class="h" data-h="5m"></td>
+                                <td rowspan="2" class="h" data-h="6m"></td>
+                                <td rowspan="2" class="h" data-h="7m"></td>
+                            </tr>
+                            <tr class="fimturno">
+                                <td>
+                                    09:55 - 11:35
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    14:00 - 15:40
+                                </td>
+                                <td rowspan="2" class="h" data-h="2t"></td>
+                                <td rowspan="2" class="h" data-h="3t"></td>
+                                <td rowspan="2" class="h" data-h="4t"></td>
+                                <td rowspan="2" class="h" data-h="5t"></td>
+                                <td rowspan="2" class="h" data-h="6t"></td>
+                                <td rowspan="2" class="h" data-h="7t"></td>
+                            </tr>
+                            <tr class="fimturno">
+                                <td>
+                                    15:55 - 17:35
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    19:20 - 20:50
+                                </td>
+                                <td rowspan="2" class="h" data-h="2n"></td>
+                                <td rowspan="2" class="h" data-h="3n"></td>
+                                <td rowspan="2" class="h" data-h="4n"></td>
+                                <td rowspan="2" class="h" data-h="5n"></td>
+                                <td rowspan="2" class="h" data-h="6n"></td>
+                                <td rowspan="2" class="h" data-h="7n"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    21:05 - 22:35
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p />
+                    <table class="disciplinasCursoTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 30px;">
+                                    &nbsp;
+                                </th>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Disciplina
+                                </th>
+                                <th>
+                                    Grupo
+                                </th>
+                                <th>
+                                    Banca
+                                </th>
+                                <th>
+                                    Cr.
+                                </th>
+                                <th>
+                                    Professor
+                                </th>
+                                <th>
+                                    Observa&ccedil;&otilde;es
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="prof">
+            <div class="filtro ui-widget ui-state-default">
+                <label for="cursoSelect">
+                    Professor:
+                </label>
+                <select id="profSelect" name="profSelect"></select>
+                <div class="toolbar">
+                    <span class="fugue fugue-document-page-previous" onclick="skipOption('#profSelect', -1);" title="Anterior"></span>
+                    <span class="fugue fugue-document-page-next" onclick="skipOption('#profSelect');" title="Pr&oacute;ximo"></span>
+                    <span class="fugue fugue-application-sidebar-collapse" onclick="toggle('#prof', '#curso', this);" title="Expandir/Contrair"></span>
+                </div>
+            </div>
+            <div class="repeater">
+                <div id="profTemplate">
+                    <div class="info ui-state-error ui-corner-all">
+                        <h2></h2>
+                        <h3>
+                            Matr&iacute;cula: <span class="matrProf"></span> Fone: <span class="foneProf"></span> Mail: <span class="mailProf"></span> CTPS: <span class="ctpsProf"></span>
+                        </h3>
+                    </div>
+                    <table class="horario horariosProfessorTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Hor&aacute;rio
+                                </th>
+                                <th>
+                                    Segunda
+                                </th>
+                                <th>
+                                    Ter&ccedil;a
+                                </th>
+                                <th>
+                                    Quarta
+                                </th>
+                                <th>
+                                    Quinta
+                                </th>
+                                <th>
+                                    Sexta
+                                </th>
+                                <th>
+                                    S&aacute;bado
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    08:00 - 09:40
+                                </td>
+                                <td rowspan="2" class="h" data-h="2m"></td>
+                                <td rowspan="2" class="h" data-h="3m"></td>
+                                <td rowspan="2" class="h" data-h="4m"></td>
+                                <td rowspan="2" class="h" data-h="5m"></td>
+                                <td rowspan="2" class="h" data-h="6m"></td>
+                                <td rowspan="2" class="h" data-h="7m"></td>
+                            </tr>
+                            <tr class="fimturno">
+                                <td>
+                                    09:55 - 11:35
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    14:00 - 15:40
+                                </td>
+                                <td rowspan="2" class="h" data-h="2t"></td>
+                                <td rowspan="2" class="h" data-h="3t"></td>
+                                <td rowspan="2" class="h" data-h="4t"></td>
+                                <td rowspan="2" class="h" data-h="5t"></td>
+                                <td rowspan="2" class="h" data-h="6t"></td>
+                                <td rowspan="2" class="h" data-h="7t"></td>
+                            </tr>
+                            <tr class="fimturno">
+                                <td>
+                                    15:55 - 17:35
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    19:20 - 20:50
+                                </td>
+                                <td rowspan="2" class="h" data-h="2n"></td>
+                                <td rowspan="2" class="h" data-h="3n"></td>
+                                <td rowspan="2" class="h" data-h="4n"></td>
+                                <td rowspan="2" class="h" data-h="5n"></td>
+                                <td rowspan="2" class="h" data-h="6n"></td>
+                                <td rowspan="2" class="h" data-h="7n"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    21:05 - 22:35
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p />
+                    <table class="disciplinasProfessorTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Disciplina
+                                </th>
+                                <th>
+                                    Grupo
+                                </th>
+                                <th>
+                                    Banca
+                                </th>
+                                <th>
+                                    Cr.
+                                </th>
+                                <th>
+                                    Curso
+                                </th>
+                                <th>
+                                    N&iacute;vel
+                                </th>
+                                <th>
+                                    Observa&ccedil;&otilde;es
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <p />
+                    <table class="atividadesProfessorTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 30px;">
+                                    <em class="diagona10px diagona-new" title="Incluir"></em>
+                                </th>
+                                <th style="width: 80px;">
+                                    C.Custo
+                                </th>
+                                <th>
+                                    Atividade
+                                </th>
+                                <th style="width: 50px;">
+                                    CH Aprovada
+                                </th>
+                                <th style="width: 50px;">
+                                    CH Distribu&iacute;da
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot class="ui-state-hover">
+                            <tr>
+                                <th colspan="4">
+                                    CH em Doc&ecirc;ncia: &nbsp;
+                                </th>
+                                <th class="ativDocencia">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="4">
+                                    Total: &nbsp;
+                                </th>
+                                <th class="ativTotal">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="4">
+                                    CTPS: &nbsp;
+                                </th>
+                                <th class="ativCTPS">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="4">
+                                    Diferen&ccedil;a: &nbsp;
+                                </th>
+                                <th class="ativDif">
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ativdialog">
+        <form id="ativform" action="javascript:void(0)">
+            <fieldset>
+                <label for="ativdialog_ccusto">Centro de Custo:</label>
+                <input type="number" id="ativdialog_ccusto" autofocus />
+                <br>
+                <label for="ativdialog_ativ">Atividade:</label>
+                <input type="text" id="ativdialog_ativ" size="40" required />
+                <br>
+                <label for="ativdialog_tipo">Tipo:</label>
+                <select name="ativdialog_tipo" id="ativdialog_tipo">
+                    <option value="0">&nbsp;</option>
+                    <option value="DOC_GR">Doc&ecirc;ncia gradua&ccedil;&atilde;o</option>
+                    <option value="DOC_POS">Doc&ecirc;ncia strito sensu</option>
+                    <option value="ORI_P_G">Orienta&ccedil;&atilde;o gradua&ccedil;&atilde;o</option>
+                    <option value="ORI_P_P">Orienta&ccedil;&atilde;o strito sensu</option>
+                    <option value="PES">Pesquisa</option>
+                    <option value="EXT">Extens&atilde;o</option>
+                    <option value="ACA">Acad&ecirc;mica</option>
+                    <option value="DESLOC">Deslocamento</option>
+                    <option value="ADM">Administrativo</option>
+                </select>
+                <br>
+                <label for="ativdialog_chaprov">CH Aprovada:</label>
+                <input type="number" step="0.5" min="0" max="40" id="ativdialog_chaprov" />
+                <br>
+                <label for="ativdialog_chdistr">CH Distribu&iacute;da:</label>
+                <input type="number" step="0.5" min="0" max="40" id="ativdialog_chdistr" required />
+                <br>
+                <input type="hidden" id="ativdialog_op" />
+            </fieldset>
+        </form>
+    </div>
+
+    <div id="disciplinadialog">
+        <form id="disciplinaform" action="javascript:void(0)">
+            <fieldset>
+                <label for="disciplinadialog_grupo">Grupo:</label>
+                <input id="disciplinadialog_grupo" size="4" />
+                <br>
+                <label for="disciplinadialog_banca">Banca:</label>
+                <input type="number" id="disciplinadialog_banca" />
+                <br>
+                <label for="disciplinadialog_ct">Cr&eacute;ditos Te&oacute;ricos:</label>
+                <input type="number" step="0.5" min="0" max="40" id="disciplinadialog_ct" required />
+                <br>
+                <label for="disciplinadialog_cp">Cr&eacute;ditos Pr&aacute;ticos:</label>
+                <input type="number" step="0.5" min="0" max="40" id="disciplinadialog_cp" required />
+                <br>
+                <label for="disciplinadialog_sp">Semipresencialidade:</label>
+                <input type="number" step="0.1" min="0.0" max="1.0" id="disciplinadialog_sp" required />
+                <br>
+
+                <label for="disciplinadialog_sala">Sala:</label>
+                <input id="disciplinadialog_sala" size="20" /> &nbsp;
+                <input type="checkbox" id="disciplinadialog_lci" value="1">
+                <label for="disciplinadialog_lci">LCI?</label>
+                <br>
+                <label for="disciplinadialog_obs">Obs:</label>
+                <input id="disciplinadialog_obs" size="70" />
+                <br>
+                <label for="disciplinadialog_compartilhamento">Compartilhada?</label>
+                <input type="checkbox" id="disciplinadialog_compartilhamento" value="1"> <i>Se marcada, n&atilde;o ir&aacute; somar na CH do professor</i>
+                <br>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="modals">
+
+        <!-- Modal opcoes-->
+        <div class="modal fade" id="opcoesModal" tabindex="-1" role="dialog" aria-labelledby="opcoesModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Opções disponiveis</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Cadastro de curso</label>
+                        <span class="fugue fugue-plus" title="Mais" data-toggle="modal" data-target="#cadCurso"></span>
+
+                        <label>Cadastro de disciplinas</label>
+                        <span class="fugue fugue-plus" title="Mais" data-toggle="modal" data-target="#cadDisciplina"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="cadCurso" tabindex="-1" role="dialog" aria-labelledby="cadCurso" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cadCursoLabel">Opções disponiveis</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="nomeCurso">Nome do curso</label>
+                                <input type="text" class="form-control" id="nomeCurso" placeholder="Digite o nome do curso">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="deslocamentoCurso">Deslocamento</label>
+                                <input type="text" class="form-control" id="deslocamentoCurso" placeholder="Digite o deslocamento total">
+                            </div>
+                            <div class="form-group">
+                                <label for="campusCurso">Campus</label>
+                                <input type="text" class="form-control" id="campusCurso" placeholder="Digite o campus">
+                            </div>
+                            <div id="niveisForm">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="campusCurso">Custo</label>
+                                            <input type="number" class="form-control" id="custoN1" placeholder="Digite o custo">
+                                        </div>
+                                        <div class="col">
+                                            <label for="campusCurso">Turma (ex: 2018/1)</label>
+                                            <input type="text" class="form-control" id="turmaN1" placeholder="Turma">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <a style="cursor: pointer;" class="text-success mt-1 mb-1" onclick="util.addNivelInput()"><b>+ Novo nivel?</b></a>
+                            </div>
+                        </form>
+                        <button onclick="db.saveCurso()" class="btn btn-primary">Salvar</button>
+                        <!--<button onclick="db.saveCurso()">Salvar curso</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Fim modal-->
+        <div class="modal fade" id="cadDisciplina" tabindex="-1" role="dialog" aria-labelledby="cadCurso" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cadDisciplinaLabel">Opções disponiveis</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="nomeCurso">Abreviação da disciplina</label>
+                                <input type="text" class="form-control" id="abrevDisciplina" placeholder="Digite o nome da disciplina">
+                            </div>
+                            <div class="form-group">
+                                <label for="nomeCurso">Nome da disciplina</label>
+                                <input type="text" class="form-control" id="nomeDisciplina" placeholder="Digite o nome da disciplina">
+                            </div>
+
+                            <div class="form-check form-check-inline mt-xl-5 mb-xl-5">
+                                <label class="form-check-label" for="posDisciplina">Pos ?</label>
+                                <input class="form-check-input" type="checkbox" id="posDisciplina">
+                            </div>
+
+                            <div class="form-check form-check-inline mt-xl-5 mb-xl-5">
+                                <label class="form-check-label" for="eletivaDisciplina">Eletiva ?</label>
+                                <input class="form-check-input" type="checkbox" id="eletivaDisciplina">
+                            </div>
+
+                        </form>
+                        <button onclick="db.saveDisciplina()" class="btn btn-primary mt-xl-5">Salvar</button>
+                        <!--<button onclick="db.saveCurso()">Salvar curso</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--fim modal-->
+    </div>
+    <script>
+
+
+    </script>
+    <!--LINKS bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!---->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <script src="jquery/plugins/chosen/chosen.jquery.min.js" type="text/javascript"></script>
+    <script src="jquery/plugins/jquery-simple-context-menu/jquery.contextmenu.js"></script>
+    <script src="js/JSLINQ.js" type="text/javascript"></script>
+    <script src="js/DB.js" type="text/javascript"></script>
+    <script src="js/UTIL.js" type="text/javascript"></script>
+    <script src="js/Default.js" type="text/javascript"></script>
+</body>
+
+</html>

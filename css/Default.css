@@ -1,0 +1,320 @@
+﻿body {
+    font-family: Segoe UI,Verdana,Arial,sans-serif;
+    font-size: 10px;
+    background-color: White;
+}
+
+html, body, form {
+    margin: 0;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+    table em {
+        cursor: pointer;
+        margin-right: 3px;
+        margin-top: 1px;
+    }
+
+    table.horario th {
+        width: 14%;
+    }
+
+    table.horario tbody tr {
+        height: 35px;
+    }
+
+    table.horario td.h table {
+        border-style: hidden;
+    }
+
+        table.horario td.h table td, table.horario td.h table th {
+            /*border: 1px dotted gray;*/
+            height: 35px;
+        }
+
+    table.horario tr.fimturno {
+        border-bottom: 2px solid #999;
+    }
+
+table, td, th {
+    border: 1px solid #AAA;
+    text-align: center;
+    padding: 0px;
+}
+
+    td span {
+        float: left;
+        width: 50%;
+        border: 1px dashed gray;
+    }
+
+    td div[data-i] b {
+        display: block;
+        font-size: 10px;
+        padding-top: 1px;
+    }
+
+label {
+    margin: 3px;
+    font-weight: bold;
+}
+
+
+div.filtro {
+    height: 28px;
+    line-height: 28px;
+    font-weight: normal;
+    padding-top: 2px;
+}
+
+div.alocado {
+    height: 100%;
+    display: inline-block;
+    width: 100%;
+}
+
+    div.alocado ins {
+        text-decoration: none;
+    }
+
+h3 span:not(:last-child):after {
+    content: " | ";
+}
+
+#splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 2em;
+    padding-left: 48%;
+    padding-top: 200px;
+}
+
+#topo {
+    height: 30px;
+    line-height: 20px;
+    vertical-align: middle;
+    padding: 3px 0 0 5px;
+    color: #AA0000;
+}
+
+    #topo h1 {
+        margin: 2px;
+        display: inline-block;
+    }
+
+    #topo .toolbar {
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+#curso {
+    float: left;
+    width: 50%;
+}
+
+#prof {
+    float: right;
+    width: 50%;
+}
+
+
+    #prof p {
+        line-height: 10px;
+        margin: 2px;
+        text-align: right;
+    }
+
+#ativdialog, #disciplinadialog {
+    display: none;
+}
+
+.ui-dialog, #disciplinadialog, form {
+    overflow: visible !important;
+}
+
+    .ui-dialog label {
+        min-width: 140px;
+        display: inline-block;
+    }
+
+    .ui-dialog input {
+        margin: 2px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 6px;
+    }
+
+    .ui-dialog select {
+        height: 25px;
+        margin: 2px;
+    }
+
+.repeater {
+    overflow-y: scroll;
+}
+
+.chzn-container {
+    font-size: 1em !important;
+}
+
+#cursoSelect {
+    width: 200px;
+}
+
+
+#nivelSelect {
+    width: 150px;
+}
+
+#profSelect {
+    width: 300px;
+}
+
+.cursoInfo {
+    border: 1px solid;
+}
+
+.indisp {
+    background-color: #FFBEAE;
+}
+
+.disciplinasProfessorTable td:nth-child(2), .disciplinasProfessorTable td:nth-child(6), .disciplinasProfessorTable td:nth-child(8), .disciplinasCursoTable td:nth-child(3), .disciplinasCursoTable td:nth-child(7), .disciplinasCursoTable td:nth-child(8) {
+    text-align: left;
+    padding-left: 2px;
+}
+
+.disciplinasProfessorTable td:first-child, .disciplinasCursoTable td:nth-child(2) {
+    padding-left: 2px;
+    padding-right: 2px;
+    font-weight: bold;
+}
+
+.atividadesProfessorTable {
+    margin-top: 2px;
+    width: 100%;
+}
+
+    .atividadesProfessorTable td:nth-child(1) {
+        text-align: right;
+    }
+
+    .atividadesProfessorTable td:nth-child(3) {
+        text-align: left;
+    }
+
+    .atividadesProfessorTable tfoot th:nth-child(1) {
+        text-align: right;
+    }
+
+
+tr.indef {
+    font-weight: bold;
+    color: #CC3300;
+}
+
+li.indef {
+    color: #CC3300;
+}
+
+.info {
+    margin: 2px 1px 2px 1px;
+    padding: 2px;
+}
+
+    .info h2 {
+        margin: 1px 1px 1px 6px;
+    }
+
+    .info h3 {
+        margin: 1px 1px 1px 6px;
+        font-weight: normal;
+    }
+
+.drag {
+    width: 80px;
+    height: 30px;
+    text-align: center;
+}
+
+.filtro .toolbar {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.toolbar span {
+    cursor: pointer;
+}
+
+
+@media print {
+    html, body, form {
+        overflow: auto;
+    }
+
+    * {
+        color: Black !important;
+        background-color: White !important;
+    }
+
+    #topo {
+        display: none;
+    }
+
+    table em {
+        visibility: hidden;
+    }
+
+    tr.indef {
+        font-weight: normal;
+        color: #000;
+    }
+
+    .noprint {
+        display: none !important;
+    }
+
+    div.filtro {
+        display: none;
+    }
+
+    div.info {
+        border-color: Black !important;
+    }
+
+    .repeater {
+        overflow: auto !important;
+        overflow-y: auto !important;
+        height: auto !important;
+    }
+
+        .repeater > div {
+            page-break-after: always;
+            page-break-inside: avoid;
+            min-height: 500px;
+        }
+
+    .disciplinasCursoTable td:first-child, .disciplinasCursoTable th:first-child {
+        display: none;
+    }
+
+    table.horario td.h table {
+	border-collapse: separate;
+  	border-spacing: 1px;
+    }
+}
+
+button.ui-dialog-titlebar-close {
+    display: none;
+}
+
